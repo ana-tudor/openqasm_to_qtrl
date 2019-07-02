@@ -25,7 +25,10 @@ def p(seg):
 param_gates = ['u1', 'u2', 'u3', 'rx', 'ry', 'rz', 'crz', 'cu1', 'cu3']
 
 def u3(params):
+    #t[0], -90, 90]
     t1, t2, l = p(params[0]), p(params[1]), p(params[2])
+    if (t1==90) and (t2==-90) and (l==90):
+        return ['X90'] 
     mat_rep = np.array([[cos(t2/2), -e(l)*sin(t2/2)],
                         [e(t1)*sin(t2/2), e(t1+l)*cos(t2/2)]])
     z1 = 'Z'+str(round(t1 - 180))
