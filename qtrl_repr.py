@@ -1,5 +1,6 @@
 import numpy as np
 from math import cos, sin, pi
+import traceback
 
 sign = lambda x: (1, -1)[x < 0]
 j = lambda a, b: np.complex(a, b)
@@ -11,15 +12,17 @@ def p(seg):
     if isinstance(seg, float) or isinstance(seg, int):
         return seg
     if len(seg.split('*')) == 2:
-        num = float (seg.split('*')[0])
+        print()
+        num = float(seg.split('*')[0])
     if len(seg.split('/')) ==2:
-        alt_num = float (seg.split('/')[1])
+        alt_num = seg.split('/')[0]
         denom = float (seg.split('/')[1])
         if alt_num == 'pi':
-            return num*pi/denom
+            return num*pi/denom*360/(2*pi)
         else:
-            return num*alt_num/denom
-    return num*pi
+            alt_num = float(alt_num)
+            return num*alt_num/denom*360/(2*pi)
+    return num*pi*360/(2*pi)
 
 
 param_gates = ['u1', 'u2', 'u3', 'rx', 'ry', 'rz', 'crz', 'cu1', 'cu3']
@@ -28,7 +31,7 @@ def u3(params):
     #t[0], -90, 90]
     t1, t2, l = p(params[0]), p(params[1]), p(params[2])
     if (t1==90) and (t2==-90) and (l==90):
-        return ['X90'] 
+        return ['X90']
     mat_rep = np.array([[cos(t2/2), -e(l)*sin(t2/2)],
                         [e(t1)*sin(t2/2), e(t1+l)*cos(t2/2)]])
     z1 = 'Z'+str(round(t1 - 180))
@@ -36,6 +39,7 @@ def u3(params):
     z3 = 'Z'+str(round(l))
     gp = str(round((l + t1)/2))
     print("U3 global phase:", gp)
+    # print("stack: ", traceback.print_exc(file=sys.stdout))
     return [z1, 'X90', z2, 'X90', z3]
 
 def u2(params):
@@ -72,7 +76,13 @@ def check_u3_mat(t1, t2, l):
 '''
 The following are in terms of the u3 representation
 '''
-rx = lambda t: u3([t[0], -90, 90])
+
+def rx(t):
+    print(p(t[0]))
+    if (round(p(t[0])) == 90) or (round(p(t[0])) == 180):
+        return ['X'+str(round(p(t[0])))]
+    else:
+        return u3([t[0], -90, 90])
 ry = lambda t: u3([t[0], 0, 0])
 rz = lambda t: ['Z'+str(round(p(t[0])))]
 
