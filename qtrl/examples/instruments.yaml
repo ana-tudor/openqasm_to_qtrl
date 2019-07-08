@@ -1,0 +1,59 @@
+VNA:
+  address: TCPIP::192.168.1.9::INSTR
+  model: E5063A
+  settings:
+    power: -15.0
+    start_frequency: 6200000000.0
+    stop_frequency: 6800000000.0
+    num_points: 1001
+    electrical_delay: 139.73e-9
+    num_averages: 1
+    bandwidth: 1000
+coil_1:
+  address: TCPIP::192.168.1.16::INSTR
+  model: GS200
+  settings:
+    source_mode: 'CURR'
+    output: 'off'
+coil_2:
+  address: TCPIP::192.168.1.5::INSTR
+  model: GS200
+  settings:
+    source_mode: 'CURR'
+    output: 'off'
+coil_3:
+  address: TCPIP::192.168.1.12::INSTR
+  model: GS200
+  settings:
+    source_mode: 'CURR'
+    output: 'off'
+coil_4:
+  address: TCPIP::192.168.1.14::INSTR
+  model: GS200
+  settings:
+    source_mode: 'CURR'
+    output: 'off'
+switch:
+  address: 192.168.1.253
+  model: RC_SP4T
+  settings:
+    channels:
+      switch: 1
+two_tone_generator:
+  address: GPIB::6
+  model: MG3692C
+  settings:
+    power: -53.0
+    rf_output: 'off'
+    frequency: 5000000000.0
+twpa_pump:
+  model: LMS
+  settings:
+    set_output_level: 6.5
+    set_frequency: 6980000000.0
+    set_extref: true
+mc_attenuator:
+  address: 192.168.1.20
+  model: MiniCircuitsAttenuator
+  settings:
+    attenuation: 0.0

@@ -1,0 +1,13 @@
+Readout:
+  R1:
+    envelope:
+      type: PulseEnvelope
+      properties:
+        env_func: square
+        kwargs:
+          amplitude: 0.5
+          phase: 0.0
+        width: 1000.0e-9
+    freq: 1.0e+6
+    channel: 0
+    subchannel: 0

@@ -1,0 +1,490 @@
+{
+	"Qubits":{
+		"Q7": {
+			"freq_2": 72.0e6
+			,"freq_brad": 66.441850e6
+			,"freq_1": 66.5355362338e6
+			,"freq": 66.6255362338e6
+			,"freq1": 66.4135362338e6
+			,"freq_ef": 5420000000.0
+			, "readfreq": 218.2e6
+			, "readfreq_new": 217.5e6
+		}
+		,"Q5": {
+			"freq": -261.61e6
+			,"freq_ef": 5420000000.0
+			, "readfreq": 103.18e6
+		}
+		,"Q6": {
+			"freq": -86.588261e6
+			,"freq_ef": 5420000000.0
+			, "readfreq": 158.5e6
+		}
+		,"Q0": {
+			"freq": 276.02735
+			,"freq_ef": 5420000000.0
+			, "readfreq": -188.5e6
+		}
+		,"Q1": {
+			"freq": 276.02735
+			,"freq_ef": 5420000000.0
+			, "readfreq": -188.5e6
+		}
+		,"Q2": {
+			"freq": 276.02735
+			,"freq_ef": 5420000000.0
+			, "readfreq": -188.5e6
+		}
+		,"Q3": {
+			"freq": 276.02735
+			,"freq_ef": 5420000000.0
+			, "readfreq": -188.5e6
+		}
+		,"Q4": {
+			"freq": 276.02735
+			,"freq_ef": 5420000000.0
+			, "readfreq": -188.5e6
+		}
+		,"M0": {
+		}
+		,"M1": {
+		}
+		,"M2": {
+		}
+		,"M3": {
+		}
+	}
+	,"Gates":{
+		"Q5rabi": [
+			{
+				"env":[{"env_func": "sin_edge_square", "paradict": {"ramp_fraction": 0.5}}
+					, {"env_func": "square", "paradict": {"phase": 0.7854, "amplitude": 1.0}}
+					, {"env_func": "gauss_edge_square", "paradict": {"sigmas": 2}}
+				]
+				,"amp":1.0
+				,"pcarrier":0.0
+				,"fcarrier":"Q5.freq"
+				,"t0":0.0
+				,"twidth":1e-7
+				,"dest":"Q5.qdrv"
+			}
+			,{
+				"env":[
+					{"env_func": "DRAG", "paradict": {"sigmas": 2,"alpha":0.4,"delta":100e6}}
+				]
+				,"amp":0.3
+				,"pcarrier":0.0
+				,"fcarrier":0.0
+				,"t0": 0e-6
+				,"twidth":1e-7
+				,"dest":"Q5.qdrv"
+			}
+		]
+		, "Q5rabi_gh": [{
+			"env":[{"env_func": "DRAG", "paradict": {"sigmas": 2,"alpha":0.4,"delta":100e6}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":"Q5.freq"
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "Q5trig": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "Q5rabi_gh1": [{
+			"env":[{"env_func": "DRAG", "paradict": {"alpha":0.4,"sigmas": 2,"delta":100e6}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":"Q5.freq"
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "Q5rabi_gh2": [{
+			"env":[{"env_func": "DRAG", "paradict": {"sigmas": 2,"alpha":0.4,"delta":100e6}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":"Q5.freq"
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "Q5rabi_gh3": [{
+			"env":[{"env_func": "DRAG", "paradict": {"sigmas": 2,"alpha":0.4,"delta":100e6}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":"Q5.freq"
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "Q5rabi_ef": [{
+			"env":[{"env_func": "sin_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":"Q5.freq"
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "Q5readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q5.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q5.read"
+		}]
+		, "Q5readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.1
+			,"fcarrier":"Q5.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q5.rdrv"
+		}]
+		, "Q7trig": [{
+			"env":[{"env_func": "square", "paradict": {"phase":45, "amplitude":1.0}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q7.qdrv"
+		}]
+
+		,"Q7rabigh": [{
+			"env":[{"env_func": "sin_edge_square", "paradict": {"ramp_fraction": 0.5}}
+				, {"env_func": "square", "paradict": {"phase": 0.7854, "amplitude": 1.0}}
+				, {"env_func": "gauss_edge_square", "paradict": {"sigmas": 2}}
+			]
+			,"amp":1.0
+			,"fcarrier":"Q7.freq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7rabi_ef": [{
+			"env":[{"env_func": "sin_edge_square", "paradict": {"ramp_fraction": 0.5}}]
+			,"amp":1.0
+			,"fcarrier":"Q7.freq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7rabi_gh1": [{
+			"env":[{"env_func": "DRAG", "paradict": {"sigmas": 2,"alpha":0.4,"delta":100e6}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"env1":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":1.0
+			,"fcarrier":"Q7.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q7.read"
+		}]
+		, "Q7readoutdrv": [{
+			"env2":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.425
+			,"fcarrier":"Q7.readfreq"
+			,"fcarrier1":"Q7.freq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q7.rdrv"
+		}]
+		, "Q6readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q6.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q6.read"
+		}]
+		, "Q6play": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.785,"amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q6.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q6.qdrv"
+		}]
+		, "Q7X180": [{
+			"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":0.0
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":64e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7Y180": [{
+			"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":"numpy.pi/2.0"
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":64e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7X90": [{
+			"env2":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":0.0
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":32e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7Y90": [{
+			"env2":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":"numpy.pi/2.0"
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":32e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7X270": [{
+			"env2":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":0.0
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":96e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7Y270": [{
+			"env2":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":"numpy.pi/2.0"
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":96e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q7rabi": [{
+			"env1":[{"env_func": "cos_edge_square", "paradict": {"ramp_fraction": 0.25}}]
+			,"env":[{"env_func": "DRAG", "paradict": {"sigmas": 3,"alpha":1.015,"delta":-268e6}}]
+			,"amp":0.32525
+			,"pcarrier":0.0
+			,"fcarrier":"Q7.freq"
+			,"t0":0.0
+			,"twidth":64e-9
+			,"dest":"Q7.qdrv"
+		}]
+		, "Q6readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.1
+			,"fcarrier":"Q6.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q6.rdrv"
+		}]
+		, "Q1readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.25
+			,"fcarrier":"Q1.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q1.rdrv"
+		}]
+		, "Q1readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q1.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q1.read"
+		}]
+		, "Q1rabi": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q1.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q1.rdrv"
+		}]
+		, "Q2readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.25
+			,"fcarrier":"Q2.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q2.rdrv"
+		}]
+		, "Q2readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q2.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q2.read"
+		}]
+		, "Q2rabi": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q2.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q2.rdrv"
+		}]
+		, "Q3readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.25
+			,"fcarrier":"Q3.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q3.rdrv"
+		}]
+		, "Q3readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q3.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q3.read"
+		}]
+		, "Q3rabi": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q3.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q3.rdrv"
+		}]
+		, "Q4readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.25
+			,"fcarrier":"Q4.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q4.rdrv"
+		}]
+		, "Q4readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q4.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q4.read"
+		}]
+		, "Q4rabi": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q4.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q4.rdrv"
+		}]
+		, "Q0readoutdrv": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":0.25
+			,"fcarrier":"Q0.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q0.rdrv"
+		}]
+		, "Q0readout": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q0.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q0.read"
+		}]
+		, "Q0rabi": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q0.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q0.rdrv"
+		}]
+		, "Q0rabi_ef": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q0.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q0.rdrv"
+		}]
+		, "Q1rabi_gh": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"fcarrier":"Q0.readfreq"
+			,"pcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-6
+			,"dest":"Q0.rdrv"
+		}]
+		, "Q1trig": [{
+			"env":[{"env_func": "square", "paradict": {"phase":0.0, "amplitude":1.0}}]
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":0.0
+			,"t0":0.0
+			,"twidth":1e-7
+			,"dest":"Q5.qdrv"
+		}]
+		, "M0mark": [{
+			"env":[{"env_func": "mark", "paradict": {}}]
+			,"t0":0.0
+			,"amp":1.0
+			,"pcarrier":0.0
+			,"fcarrier":0.0
+			,"twidth":10e-7
+			,"dest":"M0.mark"
+		}]
+	}
+}

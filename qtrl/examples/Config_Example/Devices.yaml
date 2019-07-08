@@ -1,0 +1,37 @@
+LOs:
+  Qubit_Drive_0:
+    address: GPIB0::24::INSTR
+    model: N5183B
+    settings:
+      frequency: hardware/qubit_LO
+      power: 18
+      rf_output: 'on'
+#  TWPA_Drive_1:
+#    address: GPIB0::19::INSTR
+#    model: N5183B
+#    settings:
+#      frequency: 7738000000.0
+#      power: 8.7
+#      rf_output: 'on'
+  Readout_Drive:
+    address: GPIB0::20::INSTR
+    model: N5183B
+    settings:
+      frequency: hardware/readout_LO
+      power: 18
+      rf_output: 'on'
+  TWPA_Pump:
+    address: GPIB0::10::INSTR
+    model: HMC_T2100
+    settings:
+      frequency: 7738000000.0
+      power: 8.5
+      rf_output: 'on'
+SA:
+  address: GPIB0::18::INSTR
+  model: E9010A
+  settings: {}
+VNA:
+  address: GPIB0::17::INSTR
+  model: N5230A
+  settings: {}
