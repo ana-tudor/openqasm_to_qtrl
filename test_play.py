@@ -1,13 +1,18 @@
 import os, sys
 import numpy as np
 sys.path.append("/home/wlav/quantum/Gang/qtrl/")
+sys.path.append("/home/wlav/quantum/Gang/qtrl/projects/quantum_simulation/")
+sys.path.append("/home/wlav/quantum/Gang/qtrl/tests")
+import utils
 import pkgutil
 import qtrl
+import common
 package = qtrl
 for importer, modname, ispkg in pkgutil.iter_modules(package.__path__):
     print("Found submodule {} (is a package: {})".format(modname, ispkg))
-
-
+import os
+path = os.path.dirname(qtrl.__file__)
+print(path)
 
 # some units for readability
 GHz = 1e9
@@ -24,7 +29,7 @@ class TestREFERENCE:
         from qtrl.managers import VariableManager, MetaManager, PulseManager
         from utils.readout import add_readout
 
-        EXAMPLE_DIR = os.path.join(MYPROJECT_DIR, 'ref_config')
+        EXAMPLE_DIR = os.path.join("/home/wlav/quantum/Gang/qtrl/tests", 'ref_config')
         assert os.path.exists(EXAMPLE_DIR)
 
         var = VariableManager(os.path.join(EXAMPLE_DIR, 'Variables.yaml'))
@@ -45,7 +50,7 @@ class TestREFERENCE:
             ref_array = np.load(f)
             print(ref_array)
             print(ref_array.shape)
-        #assert np.sum(ref_array != sequence.array) == 0
+        assert np.sum(ref_array != sequence.array) == 0
 
     def test_arb_seq(self, file_name):
 
@@ -64,10 +69,10 @@ class TestREFERENCE:
         for line in l:
             s_ref, e_ref = seq.append([self.cfg.pulses[line]], element=0, end_delay=10*ns)
 
-        #self.cfg.add_readout(self.cfg, seq=seq, herald_refs=['Start', 'Start'], readout_refs=['Start', e_ref])
+        self.cfg.add_readout(self.cfg, seq=seq, herald_refs=['Start', 'Start'], readout_refs=['Start', e_ref])
         seq.compile()
-
-        assert seq.array.shape == (12, 2, 122110, 1)
+        print(seq.array.shape)
+        assert seq.array.shape == (12, 2, 12110, 1)
 
         active_channels = 0
         for idx, val in enumerate(seq.array):
