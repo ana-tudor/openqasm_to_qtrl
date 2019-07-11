@@ -82,10 +82,6 @@ class TestREFERENCE:
         assert active_channels == 5 #2 for qubit, 3 for readout
 
 
-    def verify_output(self, name, sequence):
-            ref_array = np.load(f)
-
-        assert np.sum(ref_array != sequence.array) == 0
 
     def test01_rabi(self):
         """Create and verify a Rabi sequence"""
