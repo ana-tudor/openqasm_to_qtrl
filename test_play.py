@@ -184,16 +184,33 @@ class TestREFERENCE:
         sequence = all_xy(**kwargs)
         self.verify_output('all_xy', sequence)
 
+    from qtrl.sequencer import Sequence
+    def pi_no_pi(cfg, qubits, file_name):
+        """Assuming X180 pulses are well tuned for the qubits specified,
+        This generates a 2 element sequence, element 1 is X180 on all qubit
+        element 0 is nothing on all qubits"""
+        seq = Sequence(n_elements=2)
 
-    def test06_pi_no_pi(self):
+        e_ref = 'Start'
+
+        l = [line.rstrip('\n') for line in open(file_name)]
+        for qubit in qubits:
+            for line in l:
+                s_ref, e_ref = seq.append([cfg.pulses[line]], element=1, end_delay=10e-9)
+
+        cfg.add_readout(cfg, seq=seq, herald_refs=['Start', 'Start'], readout_refs=['Start', e_ref])
+        seq.compile()
+        seq._name = 'pi_no_pi'
+        return seq
+
+    def test06_pi_no_pi(self, file_name):
         """Create and verify a pi_no_pi sequence"""
-
-        from utils.char_sequences import pi_no_pi
 
         qubits = [0]
 
         kwargs = {'cfg': self.cfg,
-                  'qubits': qubits
+                  'qubits': qubits,
+                  'file_name': file_name
                  }
 
         sequence = pi_no_pi(**kwargs)
@@ -212,4 +229,4 @@ list_names = ['interleaved_coherence',\
 #verify_output(list_names[3])
 test_ref = TestREFERENCE()
 test_ref.setup_class()
-test_ref.test_arb_seq(sys.argv[1])
+test_ref.test06_pi_no_pi(sys.argv[1])
