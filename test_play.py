@@ -82,6 +82,126 @@ class TestREFERENCE:
         assert active_channels == 5 #2 for qubit, 3 for readout
 
 
+    def verify_output(self, name, sequence):
+            ref_array = np.load(f)
+
+        assert np.sum(ref_array != sequence.array) == 0
+
+    def test01_rabi(self):
+        """Create and verify a Rabi sequence"""
+
+        from utils.char_sequences import rabi
+
+        qubits = [0]
+
+        kwargs = {'cfg': self.cfg,
+                  'qubits': qubits,
+                  'step_size': 20*ns,
+                  'n_elements': 5
+                  }
+
+        sequence = rabi(**kwargs)
+        self.verify_output('rabi', sequence)
+
+    def test02_rough_pulse_tuning_sequence(self):
+        """Create and verify a rough pulse tuning sequence"""
+
+        from qtrl.calibration.single_pulse import rough_pulse_tuning_sequence
+
+        qubits = [0]
+
+        kwargs = {'config': self.cfg,
+                  'qubits': qubits,
+                  'pulse_type': '90',
+                  'min_amplitude': 0.3,
+                  'max_amplitude': 0.5,
+                 }
+
+        sequence = rough_pulse_tuning_sequence(**kwargs)
+        self.verify_output('rough_pulse_tuning_sequence', sequence)
+
+    def test03_ramsey(self):
+        """Create and verify a Ramsey sequence"""
+
+        from utils.char_sequences import ramsey
+
+        qubits = [0]
+
+        kwargs = {'cfg': self.cfg,
+                  'qubits': qubits,
+                  'n_elements': 50,
+                  'step_size': 1000*ns,
+                  'artificial_detune': 0.1*MHz,
+                 }
+
+        sequence = ramsey(**kwargs)
+        self.verify_output('ramsey', sequence)
+
+    def all_xy(cfg, qubit, prepulse=None):
+        """AllXY sequence for the GE levels of a qubit"""
+        first_pulses = ['I', 'X180', 'Z180', 'X180', 'Z180',  # end in |0> state
+                        'X90', 'Z90', 'X90', 'Z90', 'X90', 'Z90',# end in |0>+|1> state
+                        'X180', 'Z180', 'X90', 'X180', 'Z90', 'Z180',   # end in |0>+|1> state
+                        'X180', 'Z180', 'X90', 'Z90']  # end in |1> state
+
+        first_pulses_doubled = list(chain(*zip(first_pulses,first_pulses)))
+        second_pulses = ['I', 'X180', 'Z180', 'Z180', 'X180', 'I', 'I',
+                         'Z90', 'X90', 'Z180', 'X180', 'Z90',
+                         'X90', 'X180', 'X90', 'Z180', 'Z90',
+                         'I', 'I', 'X90', 'Z90']
+        second_pulses_doubled = list(chain(*zip(second_pulses, second_pulses)))
+        seq = Sequence(n_elements=len(first_pulses_doubled),x_axis = list(zip(first_pulses_doubled,second_pulses_doubled)))
+        seq._name = 'allxy'
+        readout_refs = []
+        if prepulse is not None:
+            _, og_e_ref = seq.append(prepulse)
+        else:
+            og_e_ref = "Start"
+
+        for i, (p1, p2) in enumerate(zip(first_pulses_doubled, second_pulses_doubled)):
+            _, e_ref = seq.append(cfg.pulses[f'Q{qubit}/{p1}'],
+                                  start=og_e_ref,
+                                  element=i)
+
+            _, e_ref = seq.append(cfg.pulses[f'Q{qubit}/{p2}'],
+                                  start=e_ref,
+                                  element=i)
+            readout_refs.append(e_ref)
+
+        cfg.add_readout(cfg, seq, readout_refs, seq.n_elements*['Start'])
+        seq._name = 'all_xy'  # this sets what subdirectory to save the data into after the acquisition
+        seq.compile()
+
+        return seq
+
+    def test05_all_xy(self):
+        """Create and verify an all xy sequence"""
+
+        # from utils.char_sequences import all_xZ
+
+        qubits = [0]
+
+        kwargs = {'cfg': self.cfg,
+                  'qubit': qubits[0]
+                 }
+
+        sequence = all_xy(**kwargs)
+        self.verify_output('all_xy', sequence)
+
+
+    def test06_pi_no_pi(self):
+        """Create and verify a pi_no_pi sequence"""
+
+        from utils.char_sequences import pi_no_pi
+
+        qubits = [0]
+
+        kwargs = {'cfg': self.cfg,
+                  'qubits': qubits
+                 }
+
+        sequence = pi_no_pi(**kwargs)
+        self.verify_output('pi_no_pi', sequence)
 
 list_names = ['interleaved_coherence',\
               'echo',\
